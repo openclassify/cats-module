@@ -3,6 +3,7 @@
 use Anomaly\FilesModule\File\Contract\FileRepositoryInterface;
 use Anomaly\FilesModule\File\FileUploader;
 use Anomaly\FilesModule\Folder\Contract\FolderRepositoryInterface;
+use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Model\Cats\CatsCategoryEntryTranslationsModel;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Http\Request;
@@ -291,7 +292,7 @@ class CategoryController extends AdminController
 
         if (request()->action == "save" and $file = $fileRepository->find(request()->file)) {
             if ($file->extension === 'xls' || $file->extension === 'xlsx') {
-                $pathToFolder = "/storage/streams/default/files-module/local/ads_excel/";
+                $pathToFolder = "/storage/streams/".app(Application::class)->getReference()."/files-module/local/ads_excel/";
                 Excel::import(new CategoryImport(), base_path() . $pathToFolder . $file->name);
                 $this->messages->success(trans('streams::message.create_success', ['name' => trans('module::addon.title')]));
             }
