@@ -1,5 +1,6 @@
 <?php namespace Visiosoft\CatsModule\Category;
 
+use Anomaly\Streams\Platform\Application\Application;
 use Visiosoft\AdvsModule\Adv\Contract\AdvRepositoryInterface;
 use Visiosoft\CatsModule\Category\Contract\CategoryRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
@@ -41,7 +42,7 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
 
     public function getCategoriesLevel2()
     {
-        $dBName = 'default_cats_category';
+        $dBName = app(Application::class)->tablePrefix() . 'cats_category';
         $dBNamet = $dBName . '_translations';
 
 	    $catsDB = DB::table((DB::raw($dBName . ' c1')))
