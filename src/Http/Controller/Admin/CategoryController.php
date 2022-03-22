@@ -254,36 +254,12 @@ class CategoryController extends AdminController
 
     public function createIconFile($category_id)
     {
-        $fileRepository = app(FileRepositoryInterface::class);
-        $folderRepository = app(FolderRepositoryInterface::class);
-        $uploader = app(FileUploader::class);
-
-
-        if ($request_file = $this->request->file('icon') and $folder = $folderRepository->findBySlug('category_icon') and $category = $this->categoryRepository->find($category_id)) {
-            $type = explode('.', $request_file->getClientOriginalName());
-            $type = end($type);
-
-            $filename = $category_id . "." . $type;
-
-            if ($file = $fileRepository->findByNameAndFolder($filename, $folder)) {
-                $file->forceDelete();
-            }
-
+        if ($request_file = $this->request->file('icon')) {
             try {
-                $file = new UploadedFile($request_file->getPathname(),
-                    $filename,
-                    $request_file->getClientMimeType(),
-                    $request_file->getError());
-
-                $file = $uploader->upload($file, $folder);
-
-                $url = route('anomaly.module.files::files.view', ['folder' => $folder->slug, 'name' => $file->name]);
-
-                $category->setCategoryIconUrl($url);
+                $this->categoryRepository->setCategoryIcon($category_id, $request_file);
             } catch (\Exception $exception) {
                 $this->messages->error($exception->getMessage());
             }
-
         }
     }
 
@@ -292,7 +268,7 @@ class CategoryController extends AdminController
 
         if (request()->action == "save" and $file = $fileRepository->find(request()->file)) {
             if ($file->extension === 'xls' || $file->extension === 'xlsx') {
-                $pathToFolder = "/storage/streams/".app(Application::class)->getReference()."/files-module/local/ads_excel/";
+                $pathToFolder = "/storage/streams/" . app(Application::class)->getReference() . "/files-module/local/ads_excel/";
                 Excel::import(new CategoryImport(), base_path() . $pathToFolder . $file->name);
                 $this->messages->success(trans('streams::message.create_success', ['name' => trans('module::addon.title')]));
             }
