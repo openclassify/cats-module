@@ -15,6 +15,11 @@ class CategoryApiCollection extends CategoryRepository
     {
         $this->dispatch(new CheckRequiredParams(['name', 'slug', 'seo_keyword', 'seo_description'], $params));
 
+        if (!Auth::user()->hasRole('admin'))
+        {
+            throw new \Exception(trans('streams::message.access_denied'), 403);
+        }
+
         if (isset($params['id'])) {
             unset($params['id']);
         }
@@ -37,6 +42,11 @@ class CategoryApiCollection extends CategoryRepository
     {
         $this->dispatch(new CheckRequiredParams(['id'], $params));
 
+        if (!Auth::user()->hasRole('admin'))
+        {
+            throw new \Exception(trans('streams::message.access_denied'), 403);
+        }
+
         $category = $this->newQuery()->find($params['id']);
 
         if (!$category) {
@@ -55,6 +65,11 @@ class CategoryApiCollection extends CategoryRepository
     public function edit(array $params)
     {
         $this->dispatch(new CheckRequiredParams(['id'], $params));
+
+        if (!Auth::user()->hasRole('admin'))
+        {
+            throw new \Exception(trans('streams::message.access_denied'), 403);
+        }
 
         if (!empty($params['parent_category_id'])) {
 
@@ -81,6 +96,11 @@ class CategoryApiCollection extends CategoryRepository
 
     public function list(array $params)
     {
+        if (!Auth::user()->hasRole('admin'))
+        {
+            throw new \Exception(trans('streams::message.access_denied'), 403);
+        }
+
         if (!empty($params['id'])) {
             $category = $this->newQuery()->find($params['id']);
 
@@ -96,6 +116,11 @@ class CategoryApiCollection extends CategoryRepository
 
     public function editIcon(array $params)
     {
+        if (!Auth::user()->hasRole('admin'))
+        {
+            throw new \Exception(trans('streams::message.access_denied'), 403);
+        }
+
         $this->dispatch(new CheckRequiredParams(['id'], $params));
 
         if (!isset(request()->file('options')['parameters']['icon'])) {
