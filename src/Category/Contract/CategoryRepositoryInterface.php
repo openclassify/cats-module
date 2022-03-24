@@ -25,4 +25,6 @@ interface CategoryRepositoryInterface extends EntryRepositoryInterface
 	public function getMainAndSubCats();
 
     public function noMetaReport();
+
+    public function setCategoryIcon($category_id, $r_file);
 }

@@ -1,6 +1,11 @@
 <?php namespace Visiosoft\CatsModule\Category;
 
+use Anomaly\FilesModule\File\Contract\FileRepositoryInterface;
+use Anomaly\FilesModule\File\FileUploader;
+use Anomaly\FilesModule\Folder\Contract\FolderRepositoryInterface;
 use Anomaly\Streams\Platform\Application\Application;
+use Anomaly\Streams\Platform\Message\MessageBag;
+use Illuminate\Http\UploadedFile;
 use Visiosoft\AdvsModule\Adv\Contract\AdvRepositoryInterface;
 use Visiosoft\CatsModule\Category\Contract\CategoryRepositoryInterface;
 use Anomaly\Streams\Platform\Entry\EntryRepository;
@@ -45,38 +50,38 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
         $dBName = app(Application::class)->tablePrefix() . 'cats_category';
         $dBNamet = $dBName . '_translations';
 
-	    $catsDB = DB::table((DB::raw($dBName . ' c1')))
-		    ->select(
-			    DB::raw('c1.id'),
-			    DB::raw('c1.slug'),
-			    DB::raw('c1.icon'),
-			    DB::raw('c1.count'),
-			    DB::raw('c1.parent_category_id'),
-			    DB::raw('t1.name'),
+        $catsDB = DB::table((DB::raw($dBName . ' c1')))
+            ->select(
+                DB::raw('c1.id'),
+                DB::raw('c1.slug'),
+                DB::raw('c1.icon'),
+                DB::raw('c1.count'),
+                DB::raw('c1.parent_category_id'),
+                DB::raw('t1.name'),
 
-			    DB::raw('c2.id as c2_id'),
-			    DB::raw('c2.slug as c2_slug'),
-			    DB::raw('c2.count as c2_count'),
-			    DB::raw('c2.parent_category_id as c2_parent_category_id'),
-			    DB::raw('t2.name as c2_name')
-		    )
-		    ->leftJoin((DB::raw($dBName . ' c2')), DB::raw('c2.parent_category_id'), '=', DB::raw('c1.id'))
-		    ->leftJoin((DB::raw($dBNamet . ' t1')), DB::raw('c1.id'), '=', DB::raw('t1.entry_id'))
-		    ->leftJoin((DB::raw($dBNamet . ' t2')), function ($join) {
-			    $join->on(DB::raw('c2.id'), '=', DB::raw('t2.entry_id'))
-				    ->where(DB::raw('t2.locale'), Request()->session()->get('_locale', setting_value('streams::default_locale')));
-		    })
-		    ->where(DB::raw('t1.locale'), Request()->session()->get('_locale', setting_value('streams::default_locale')))
-		    ->where(DB::raw("c1.deleted_at"), NULL)
-		    ->where(DB::raw("c2.deleted_at"), NULL)
-		    ->whereNull(DB::raw("c1.parent_category_id"))
-		    ->orderBy(DB::raw("c1.sort_order"))
-		    ->orderBy(DB::raw("c2.sort_order"))
-		    ->get();
-	    $cats = collect([]);
-	    $cats->subcats = $catsDB;
-	    $cats->maincats = $catsDB->unique('id');
-	    return $cats;
+                DB::raw('c2.id as c2_id'),
+                DB::raw('c2.slug as c2_slug'),
+                DB::raw('c2.count as c2_count'),
+                DB::raw('c2.parent_category_id as c2_parent_category_id'),
+                DB::raw('t2.name as c2_name')
+            )
+            ->leftJoin((DB::raw($dBName . ' c2')), DB::raw('c2.parent_category_id'), '=', DB::raw('c1.id'))
+            ->leftJoin((DB::raw($dBNamet . ' t1')), DB::raw('c1.id'), '=', DB::raw('t1.entry_id'))
+            ->leftJoin((DB::raw($dBNamet . ' t2')), function ($join) {
+                $join->on(DB::raw('c2.id'), '=', DB::raw('t2.entry_id'))
+                    ->where(DB::raw('t2.locale'), Request()->session()->get('_locale', setting_value('streams::default_locale')));
+            })
+            ->where(DB::raw('t1.locale'), Request()->session()->get('_locale', setting_value('streams::default_locale')))
+            ->where(DB::raw("c1.deleted_at"), NULL)
+            ->where(DB::raw("c2.deleted_at"), NULL)
+            ->whereNull(DB::raw("c1.parent_category_id"))
+            ->orderBy(DB::raw("c1.sort_order"))
+            ->orderBy(DB::raw("c2.sort_order"))
+            ->get();
+        $cats = collect([]);
+        $cats->subcats = $catsDB;
+        $cats->maincats = $catsDB->unique('id');
+        return $cats;
     }
 
     public function getCategoryById($id)
@@ -214,5 +219,42 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
         $categories = $categories->paginate($limit, ['*'], 'page', $page);
 
         return $categories;
+    }
+
+    public function setCategoryIcon($category_id, $r_file)
+    {
+        $uploader = app(FileUploader::class);
+        $fileRepository = app(FileRepositoryInterface::class);
+        $folderRepository = app(FolderRepositoryInterface::class);
+
+        $type = explode('.', $r_file->getClientOriginalName());
+        $type = end($type);
+
+        $filename = $category_id . "." . $type;
+
+        if (!$category = $this->find($category_id)) {
+            throw new \Exception(trans('visiosoft.module.cats::message.not_found', ['name' => 'Category']), 404);
+            die;
+        };
+
+        if (!$folder = $folderRepository->findBySlug('category_icon')) {
+            throw new \Exception(trans('visiosoft.module.cats::message.not_found', ['name' => "'category_icon' folder"]), 404);
+            die;
+        };
+
+        if ($file = $fileRepository->findByNameAndFolder($filename, $folder)) {
+            $file->forceDelete();
+        }
+
+        $file = new UploadedFile($r_file->getPathname(),
+            $filename,
+            $r_file->getClientMimeType(),
+            $r_file->getError());
+
+        $file = $uploader->upload($file, $folder);
+
+        $url = route('anomaly.module.files::files.view', ['folder' => $folder->slug, 'name' => $file->name]);
+
+        $category->setCategoryIconUrl($url);
     }
 }
