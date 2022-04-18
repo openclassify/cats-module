@@ -4,6 +4,7 @@ use Anomaly\Streams\Platform\Addon\Plugin\Plugin;
 use Anomaly\Streams\Platform\Image\Command\MakeImageInstance;
 
 use Visiosoft\CatsModule\Category\Command\getCategoriesLevel2;
+use Visiosoft\CatsModule\Category\Command\getCategoriesLevel3;
 use Visiosoft\CatsModule\Category\Command\GetCategoryName;
 use Visiosoft\CatsModule\Category\Command\GetCategoryDetail;
 use Visiosoft\CatsModule\Category\Contract\CategoryRepositoryInterface;
@@ -69,6 +70,14 @@ class CatsModulePlugin extends Plugin
                         return 0;
                     }
                     return $getCategoriesLevel2;
+                }
+            ), new \Twig_SimpleFunction(
+                'getCategoriesLevel3',
+                function () {
+                    if (!$getCategoriesLevel3 = $this->dispatch(new getCategoriesLevel3())) {
+                        return 0;
+                    }
+                    return $getCategoriesLevel3;
                 }
             )
         ];
