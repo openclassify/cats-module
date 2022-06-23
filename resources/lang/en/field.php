@@ -12,7 +12,9 @@ return [
     'slug' => [
         'name' => 'Slug',
         'instructions' => 'Specify any organizational tags to help group your post with others.',
-
+    ],
+    'description' => [
+        'name' => 'Description'
     ],
     'files' => [
         'name' => 'Image',
