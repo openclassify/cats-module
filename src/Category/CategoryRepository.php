@@ -201,7 +201,7 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
 
     public function getDeletedCategories()
     {
-        return $this->model->withTrashed()->newQuery()->whereNotNull('deleted_at')->get();
+        return $this->model->withTrashed()->newQuery()->whereNotNull('deleted_at')->limit(1)->get();
     }
 
     public function getMainAndSubCats()
