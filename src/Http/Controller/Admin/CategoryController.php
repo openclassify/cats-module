@@ -228,7 +228,7 @@ class CategoryController extends AdminController
             $delete_category_keys = $cats->pluck('id')->all();
             $query_delete = $this->categoryRepository->newQuery()->whereIn('parent_category_id', $delete_category_keys);
             if ($query_delete->count()) {
-                $query_delete->delete();
+                $query_delete->limit(100)->delete();
                 $sub_c++;
             }
         }
