@@ -51,7 +51,7 @@ class CategoryController extends AdminController
             $categories = CategoryModel::query()->where('parent_category_id', $request->cat)->whereNull('deleted_at')->get();
         }
         if (count($categories) == 0 and isset($request->cat) || $request->cat != "") {
-            $this->messages->error('Selected category has no sub-categories.');
+            $this->messages->error(trans('visiosoft.module.cats::message.cat_no_sub'));
             return back();
         }
         if ($request->view != "trash") {
@@ -76,7 +76,7 @@ class CategoryController extends AdminController
                 }
             }
             if ($i > 10) {
-                $this->messages->error('You have reached your sub-category limit, you can only add 9 sub-categories.');
+                $this->messages->error(trans('visiosoft.module.cats::message.sub_limit'));
 
                 return $this->redirect->back();
             }
