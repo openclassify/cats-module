@@ -46,4 +46,11 @@ return [
     'categories_with_no_meta_report' => 'Categories with No Meta Report',
     'category' => 'Category',
     'id' => 'ID',
+
+    //Make Main Category
+    'make_main_cat_text' => 'Are You Sure ?',
+    'make_main_cat_title' => 'You are going to make this category main permanently.',
+    'make_main_cat_confirm' => 'Confirm',
+    'make_main_cat_decline' => 'Decline',
+
 ];

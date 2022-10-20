@@ -75,5 +75,12 @@
         {% endblock %}
 
     {% endif %}
-
+    <script>
+        const categoryTableTrans = {
+            makeMainCategoryText: `{{ trans('visiosoft.module.cats::field.make_main_cat_text') }}`,
+            makeMainCategoryTitle: `{{ trans('visiosoft.module.cats::field.make_main_cat_title') }}`,
+            makeMainCategoryConfirmText: `{{ trans('visiosoft.module.cats::field.make_main_cat_confirm') }}`,
+            makeMainCategoryDeclineText: `{{ trans('visiosoft.module.cats::field.make_main_cat_decline') }}`,
+        };
+    </script>
 </div>

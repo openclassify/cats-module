@@ -37,5 +37,11 @@ return [
     'please_wait' => 'Lütfen bekleyin. Alt Kategoriler Siliniyor',
     'category_selection' => 'Kategori Seçimi',
     'go_to_parent' => 'Kategoriye Dön',
-	'preview' => 'Ön İzleme'
+	'preview' => 'Ön İzleme',
+
+    //Make Main Category
+    'make_main_cat_text' => 'Emin Misiniz ?',
+    'make_main_cat_title' => 'Bu kategoriyi kalıcı olarak ana kategori yapmak üzeresiniz.',
+    'make_main_cat_confirm' => 'Onayla',
+    'make_main_cat_decline' => 'Vazgeç',
 ];

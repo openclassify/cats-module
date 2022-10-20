@@ -73,6 +73,8 @@ class CategoryTableBuilder extends TableBuilder
     protected $assets = [
         'scripts.js' => [
             'visiosoft.module.cats::js/custom-field.js',
+            'visiosoft.theme.defaultadmin::js/libraries/sweetalert.min.js',
+            'visiosoft.module.cats::js/admin/make_main_category.js',
         ],
     ];
 }

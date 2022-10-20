@@ -24,9 +24,11 @@ class CategoryTableButtons
             'convert_main' => [
                 'icon' => 'refresh',
                 'class' => function () {
+                    $class = 'sure-modal';
                     if (!request('cat')) {
-                        return 'hidden';
+                        $class = $class.' hidden';
                     }
+                    return $class;
                 },
                 'type' => 'info',
                 'href' => '/admin/cats/convert-main/{entry.id}'
