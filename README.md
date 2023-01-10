@@ -1,18 +1,13 @@
-# Cats Modülü
-İlanlara Kategori tanımlamıza olanak sağlar.
+## Category Module
 
-Maksimum 6 Alt Kategori'ye kadar desteklenir.
-
-
-#Admin Panel
-Kategori ve Alt ketegori eklemenize olanak sağlar.
+It allows you to create unlimited subcategories for the Advs module and to manage your postings by category.
 
 
-##Modül Gereklilikleri/Module Requirements
-- ADVS Modülü
+> It allows 10 subcategories by system default for Advs.
 
-##API Collection
+
+### API
 https://documenter.getpostman.com/view/4871431/UVsQtjhJ
 
-##
-support@visiosoft.com.tr
+
+See the **[documentation](https://docs.openclassify.com/)** for more information.
