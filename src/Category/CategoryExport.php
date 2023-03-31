@@ -22,6 +22,7 @@ class CategoryExport implements WithMapping, FromCollection, WithHeadings
             $cats->count,
             $cats->seo_keyword,
             $cats->seo_description,
+            $cats->seo_title,
 		];
 	}
 
@@ -35,6 +36,7 @@ class CategoryExport implements WithMapping, FromCollection, WithHeadings
 			trans('module::field.count'),
 			trans('module::field.seo_keyword.name'),
 			trans('module::field.seo_description.name'),
-		];
+            trans('module::field.seo_title.name'),
+        ];
 	}
 }

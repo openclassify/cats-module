@@ -12,6 +12,8 @@ interface CategoryInterface extends EntryInterface
 
     public function getMetaDescription();
 
+    public function getMetaTitle();
+
     public function getParent();
 
     public function getMains($id);

@@ -76,6 +76,11 @@ class CategoryModel extends CatsCategoryEntryModel implements CategoryInterface
         return $this->seo_description;
     }
 
+    public function getMetaTitle()
+    {
+        return $this->seo_title;
+    }
+
     public function getParent()
     {
         return $this->parent_category;
