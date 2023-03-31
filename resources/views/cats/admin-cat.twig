@@ -48,6 +48,9 @@
                             </div>
                             {{ form.fields.icon.input|raw }}
                         </div>
+                        {% for field in form.fields.translations('seo_title') %}
+                            {{ field.render({'form': form})|raw }}
+                        {% endfor %}
                         {{ form.fields.seo_keyword|raw }}
                         {{ form.fields.seo_description|raw }}
                     </div><!-- section -->

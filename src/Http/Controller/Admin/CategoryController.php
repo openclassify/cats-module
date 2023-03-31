@@ -125,6 +125,7 @@ class CategoryController extends AdminController
                         'parent_category' => $all['parent_category'] === "" ? null : $all['parent_category'],
                         'seo_keyword' => $all['seo_keyword'],
                         'seo_description' => $all['seo_description'],
+                        'seo_title' => $all['seo_title']
                     ]));
 
                     $this->createIconFile($category->getId());
@@ -158,6 +159,7 @@ class CategoryController extends AdminController
                         'parent_category' => $all['parent_category'] === "" ? null : $all['parent_category'],
                         'seo_keyword' => $all['seo_keyword'],
                         'seo_description' => $all['seo_description'],
+                        'seo_title' => $all['seo_title']
                     ]));
 
                     $this->createIconFile($category->getId());

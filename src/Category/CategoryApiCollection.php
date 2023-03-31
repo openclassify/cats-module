@@ -13,7 +13,7 @@ class CategoryApiCollection extends CategoryRepository
 
     public function add(array $params)
     {
-        $this->dispatch(new CheckRequiredParams(['name', 'slug', 'seo_keyword', 'seo_description'], $params));
+        $this->dispatch(new CheckRequiredParams(['name', 'slug', 'seo_title', 'seo_keyword', 'seo_description'], $params));
 
         if (!Auth::user()->hasRole('admin'))
         {

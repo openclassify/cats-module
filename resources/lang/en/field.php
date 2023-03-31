@@ -27,6 +27,9 @@ return [
         'name' => 'Seo Description',
         'instructions' => 'It can affect your visitors\' decision on whether they want to click on the content in the search results.',
     ],
+    'seo_title' => [
+        'name' => 'Seo Title',
+    ],
     'icon' => [
         'name' => 'Icon',
         'instructions' => 'It is used to add icons indicating the category type.',

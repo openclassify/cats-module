@@ -25,6 +25,9 @@ return [
         'name' => 'Seo Açıklaması',
         'instructions' => 'Ziyaretçilerinizin içeriğini arama sonuçlarında tıklamak isteyip istemedikleri konusundaki kararını etkileyebilir.',
     ],
+    'seo_title' => [
+        'name' => 'Seo Başlığı',
+    ],
     'icon' => [
         'name' => 'İkon',
         'instructions' => 'Kategori türünü belirten ikon eklemeye yarar.',

@@ -253,7 +253,7 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
             ->select('name as category', 'cats_category.id')
             ->where(function ($q) {
                 $q->whereNull('seo_keyword')
-                    ->orWhereNull('seo_description');
+                    ->orWhereNull('seo_description')->orWhereNull('seo_title');
             })
             ->leftJoin('cats_category_translations as cats_trans', function ($join) {
                 $join->on('cats_category.id', '=', 'cats_trans.entry_id');
