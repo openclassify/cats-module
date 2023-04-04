@@ -8,8 +8,10 @@ use Anomaly\Streams\Platform\Model\Cats\CatsCategoryEntryTranslationsModel;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use League\Flysystem\MountManager;
+use Visiosoft\AdvsModule\Adv\Contract\AdvRepositoryInterface;
 use Visiosoft\CatsModule\Category\CategoryExport;
 use Visiosoft\CatsModule\Category\CategoryImport;
 use Visiosoft\CatsModule\Category\CategoryModel;
@@ -27,18 +29,21 @@ class CategoryController extends AdminController
     private $categoryRepository;
     private $categoryEntryTranslationsModel;
     private $str;
+    private $advRepository;
 
     use DeleteCategory;
 
     public function __construct(
         CategoryRepositoryInterface $categoryRepository,
         CatsCategoryEntryTranslationsModel $categoryEntryTranslationsModel,
-        Str $str
+        Str $str,
+        AdvRepositoryInterface $advRepository
     )
     {
         $this->categoryRepository = $categoryRepository;
         $this->categoryEntryTranslationsModel = $categoryEntryTranslationsModel;
         $this->str = $str;
+        $this->advRepository = $advRepository;
         parent::__construct();
     }
 
@@ -322,10 +327,27 @@ class CategoryController extends AdminController
     public function convertMain($id)
     {
         if ($category = $this->categoryRepository->find($id)) {
-            $category->update(['parent_category_id' => null]);
+             $category->update(['parent_category_id' => null,'level' => 1]);
 
-            $this->messages->success(trans('streams::message.edit_success', ['name' => trans('visiosoft.module.cats::addon.title')]));
-            return redirect('admin/cats');
+             $this->advRepository
+                 ->newQuery()
+                 ->where('cat'.$category->level, $id)
+                 ->update([
+                     'cat1' => DB::raw('cat2'),
+                     'cat2' => DB::raw('cat3'),
+                     'cat3' => DB::raw('cat4'),
+                     'cat4' => DB::raw('cat5'),
+                     'cat5' => DB::raw('cat6'),
+                     'cat6' => DB::raw('cat7'),
+                     'cat7' => DB::raw('cat8'),
+                     'cat8' => DB::raw('cat9'),
+                     'cat9' => DB::raw('cat10'),
+                     'cat10' => null
+                 ]);
+             $this->messages->success(trans('streams::message.edit_success', ['name' => trans('visiosoft.module.cats::addon.title')]));
         }
+
+        return redirect('admin/cats');
+
     }
 }
