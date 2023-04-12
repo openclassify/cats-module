@@ -10,7 +10,7 @@ class VisiosoftModuleCatsAddDescription extends Migration
 
     protected $fields = [
         'description' => [
-            'type' => 'anomaly.field_type.textarea',
+            'type' => 'anomaly.field_type.wysiwyg',
             'config' => [
                 'translatable' => true,
                 'default_value' => '',
