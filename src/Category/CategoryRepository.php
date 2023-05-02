@@ -107,6 +107,7 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
                 DB::raw('t2.name as c2_name'),
 
                 DB::raw('c3.id as c3_id'),
+                DB::raw('c3.icon as c3_icon'),
                 DB::raw('c3.slug as c3_slug'),
                 DB::raw('c3.count as c3_count'),
                 DB::raw('c3.parent_category_id as c3_parent_category_id'),
