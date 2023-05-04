@@ -28,8 +28,11 @@
                             {% endfor %}
                         </div>
                         {{ form.fields.slug|raw }}
-                        {{ form.fields.description|raw }}
-                        <input type="hidden" name="parent_category"
+                        <div class="field-group description">
+                            {% for field in form.fields.translations('description') %}
+                                {{ field.render({'form': form})|raw }}
+                            {% endfor %}
+                        </div>                        <input type="hidden" name="parent_category"
                                value="{% if form.fields.parent_category.value.id is defined %}{{ form.fields.parent_category.value.id }}{% elseif app.request.get('parent')  is defined %}{{ app.request.get('parent') }}{% endif %}">
                         <div class="form-group icon-field input_file-field_type">
                             <label for="icon" class="control-label">

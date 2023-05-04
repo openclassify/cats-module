@@ -54,11 +54,11 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
             ->select(
                 DB::raw('c1.id'),
                 DB::raw('c1.slug'),
-                DB::raw('c1.description'),
                 DB::raw('c1.icon'),
                 DB::raw('c1.count'),
                 DB::raw('c1.parent_category_id'),
                 DB::raw('t1.name'),
+                DB::raw('t1.description'),
 
                 DB::raw('c2.id as c2_id'),
                 DB::raw('c2.slug as c2_slug'),
