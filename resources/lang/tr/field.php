@@ -47,4 +47,7 @@ return [
     'make_main_cat_title' => 'Bu kategoriyi kalıcı olarak ana kategori yapmak üzeresiniz.',
     'make_main_cat_confirm' => 'Onayla',
     'make_main_cat_decline' => 'Vazgeç',
+    'image' => [
+        'name' => 'Kategori Resmi'
+    ]
 ];
