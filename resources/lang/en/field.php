@@ -55,5 +55,8 @@ return [
     'make_main_cat_title' => 'You are going to make this category main permanently.',
     'make_main_cat_confirm' => 'Confirm',
     'make_main_cat_decline' => 'Decline',
+    'image' => [
+        'name' => 'Category Image'
+    ]
 
 ];
