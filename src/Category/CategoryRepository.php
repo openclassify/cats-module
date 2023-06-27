@@ -315,4 +315,18 @@ class CategoryRepository extends EntryRepository implements CategoryRepositoryIn
 
         $category->setCategoryIconUrl($url);
     }
+
+
+    public function getSubCatsByParentSlug($slug)
+    {
+        $parent_cat = $this->newQuery()->where('slug', $slug)->first();
+        if ($parent_cat) {
+            $cats = $this->newQuery()
+                ->where('parent_category_id', $parent_cat->id)
+                ->where('deleted_at', null)
+                ->get();
+            return $cats;
+        }
+        return null;
+    }
 }
