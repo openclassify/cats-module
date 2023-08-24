@@ -9,7 +9,10 @@ class CategoryTableBuilder extends TableBuilder
 
     public function onQuerying(Builder $query)
     {
-        $query->whereNull('parent_category_id');
+        if(!request()->cat){
+            $query->whereNull('parent_category_id');
+        }
+
     }
 
     /**
