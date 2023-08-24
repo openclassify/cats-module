@@ -1,10 +1,19 @@
 <?php namespace Visiosoft\CatsModule\Category\Table;
 
 use Anomaly\Streams\Platform\Ui\Table\TableBuilder;
+use Illuminate\Database\Eloquent\Builder;
 use Visiosoft\CatsModule\Category\Table\Handler\Delete;
 
 class CategoryTableBuilder extends TableBuilder
 {
+
+    public function onQuerying(Builder $query)
+    {
+        if(!request()->cat){
+            $query->whereNull('parent_category_id');
+        }
+
+    }
 
     /**
      * The table views.
