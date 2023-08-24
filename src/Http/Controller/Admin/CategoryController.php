@@ -7,10 +7,10 @@ use Anomaly\Streams\Platform\Application\Application;
 use Anomaly\Streams\Platform\Model\Cats\CatsCategoryEntryTranslationsModel;
 use Anomaly\Streams\Platform\Ui\Form\FormBuilder;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use League\Flysystem\MountManager;
+use Maatwebsite\Excel\ExcelServiceProvider;
 use Visiosoft\AdvsModule\Adv\Contract\AdvRepositoryInterface;
 use Visiosoft\CatsModule\Category\CategoryExport;
 use Visiosoft\CatsModule\Category\CategoryImport;
@@ -274,6 +274,7 @@ class CategoryController extends AdminController
         if (request()->action == "save" and $file = $fileRepository->find(request()->file)) {
             if ($file->extension === 'xls' || $file->extension === 'xlsx') {
                 $pathToFolder = "/storage/streams/" . app(Application::class)->getReference() . "/files-module/local/ads_excel/";
+                app()->register(ExcelServiceProvider::class);
                 Excel::import(new CategoryImport(), base_path() . $pathToFolder . $file->name);
                 $this->messages->success(trans('streams::message.create_success', ['name' => trans('module::addon.title')]));
             }
@@ -302,6 +303,7 @@ class CategoryController extends AdminController
 
     public function export()
     {
+        app()->register(ExcelServiceProvider::class);
         return Excel::download(new CategoryExport(), 'cats-' . time() . '.xlsx');
     }
 
