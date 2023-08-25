@@ -2,8 +2,8 @@
 
 return [
     'categories_mass_delete_success' => 'Kategorier och relaterade underkategorier har tagits bort!',
-    'cat_slug_exists' => 'A category with a slug of :slug already exists!',
-    'not_found' => ':name not found!',
-    'cat_no_sub' => 'Selected category has no sub-categories.',
-    'sub_limit' => 'You have reached your sub-category limit, you can only add 9 sub-categories.',
+    'cat_slug_exists' => 'En kategori med en slug :slug finns redan!',
+    'not_found' => ':name hittades inte!',
+    'cat_no_sub' => 'Den valda kategorin har inga underkategorier.',
+    'sub_limit' => 'Du har nått din underkategorigräns, du kan bara lägga till 9 underkategorier.',
 ];
