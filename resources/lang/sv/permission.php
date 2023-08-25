@@ -10,7 +10,7 @@ return [
         ],
     ],
     'placeholderforsearch' => [
-        'name'   => 'Placeholderforsearch',
+        'name'   => 'Platshållare för sökning',
         'option' => [
             'read'   => 'Kan du läsa platshållareundersökning?',
             'write'  => 'Kan skapa / redigera platshållersökning?',
