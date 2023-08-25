@@ -14,7 +14,7 @@ return [
         'instructions' => 'Ange organisatoriska taggar som hjälper dig att gruppera ditt inlägg med andra.',
     ],
     'description' => [
-        'name' => 'Description'
+        'name' => 'Beskrivning'
     ],
     'files' => [
         'name' => 'Bild',
@@ -28,35 +28,35 @@ return [
         'instructions' => 'Det kan påverka dina besökares beslut om de vill klicka på innehållet i sökresultaten.',
     ],
     'seo_title' => [
-        'name' => 'Seo Title',
+        'name' => 'Metatitel',
     ],
     'icon' => [
         'name' => 'Ikon',
         'instructions' => 'Det används för att lägga till ikoner som anger kategoritypen.',
     ],
 
-    'parent' => 'Parent',
-    'level' => 'Level',
-    'count' => 'Ad Counts',
+    'parent' => 'Förälder',
+    'level' => 'Nivå',
+    'count' => 'Annonsen räknas',
 
     'please_wait' => 'Vänta. Ta bort underkategorier',
     'category_selection' => 'Val av kategori',
     'go_to_parent' => 'Gå till förälder',
-	'preview' => 'Preview',
+	'preview' => 'Förhandsvisning',
 
     // Report
-    'undefined_category' => 'Undefined Category',
-    'categories_with_no_meta_report' => 'Categories with No Meta Report',
-    'category' => 'Category',
+    'undefined_category' => 'Odefinierad kategori',
+    'categories_with_no_meta_report' => 'Kategorier utan metarapport',
+    'category' => 'Kategori',
     'id' => 'ID',
 
     //Make Main Category
-    'make_main_cat_text' => 'Are You Sure ?',
-    'make_main_cat_title' => 'You are going to make this category main permanently.',
-    'make_main_cat_confirm' => 'Confirm',
-    'make_main_cat_decline' => 'Decline',
+    'make_main_cat_text' => 'Är du säker ?',
+    'make_main_cat_title' => 'Du kommer att göra denna kategori till huvud permanent.',
+    'make_main_cat_confirm' => 'Bekräfta',
+    'make_main_cat_decline' => 'Nedgång',
     'image' => [
-        'name' => 'Category Image'
+        'name' => 'Kategoribild'
     ]
 
 ];
