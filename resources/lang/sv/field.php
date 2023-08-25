@@ -12,7 +12,9 @@ return [
     'slug' => [
         'name' => 'Snigel',
         'instructions' => 'Ange organisatoriska taggar som hjälper dig att gruppera ditt inlägg med andra.',
-
+    ],
+    'description' => [
+        'name' => 'Beskrivning'
     ],
     'files' => [
         'name' => 'Bild',
@@ -25,17 +27,36 @@ return [
         'name' => 'Seo-beskrivning',
         'instructions' => 'Det kan påverka dina besökares beslut om de vill klicka på innehållet i sökresultaten.',
     ],
+    'seo_title' => [
+        'name' => 'Metatitel',
+    ],
     'icon' => [
         'name' => 'Ikon',
         'instructions' => 'Det används för att lägga till ikoner som anger kategoritypen.',
     ],
 
-    'parent' => 'Parent',
-    'level' => 'Level',
-    'count' => 'Ad Counts',
+    'parent' => 'Förälder',
+    'level' => 'Nivå',
+    'count' => 'Annonsen räknas',
 
     'please_wait' => 'Vänta. Ta bort underkategorier',
     'category_selection' => 'Val av kategori',
     'go_to_parent' => 'Gå till förälder',
-	'preview' => 'Preview'
+	'preview' => 'Förhandsvisning',
+
+    // Report
+    'undefined_category' => 'Odefinierad kategori',
+    'categories_with_no_meta_report' => 'Kategorier utan metarapport',
+    'category' => 'Kategori',
+    'id' => 'ID',
+
+    //Make Main Category
+    'make_main_cat_text' => 'Är du säker ?',
+    'make_main_cat_title' => 'Du kommer att göra denna kategori till huvud permanent.',
+    'make_main_cat_confirm' => 'Bekräfta',
+    'make_main_cat_decline' => 'Nedgång',
+    'image' => [
+        'name' => 'Kategoribild'
+    ]
+
 ];

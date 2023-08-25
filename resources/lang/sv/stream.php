@@ -5,6 +5,6 @@ return [
         'name' => 'Kategori',
     ],
     'placeholderforsearch' => [
-        'name' => 'Placeholderforsearch',
+        'name' => 'Platshållare för sökning',
     ],
 ];
