@@ -28,7 +28,7 @@ class CatsModulePlugin extends Plugin
                 'category_name',
                 function ($id) {
 
-                    if (!$ad = $this->dispatch(new GetCategoryName($id))) {
+                    if (!$ad = dispatch_sync(new GetCategoryName($id))) {
                         return null;
                     }
 
@@ -38,7 +38,7 @@ class CatsModulePlugin extends Plugin
                 'category_detail',
                 function ($id) {
 
-                    if (!$ad = $this->dispatch(new GetCategoryDetail($id))) {
+                    if (!$ad = dispatch_sync(new GetCategoryDetail($id))) {
                         return null;
                     }
 
@@ -58,7 +58,7 @@ class CatsModulePlugin extends Plugin
                 'catIcon',
                 function ($path) {
                     if ($path == "") {
-                        return $this->dispatch(new MakeImageInstance('visiosoft.theme.base::images/default-categories-icon.png', 'img'))->url();
+                        return dispatch_sync(new MakeImageInstance('visiosoft.theme.base::images/default-categories-icon.png', 'img'))->url();
                     } else {
                         return url('files/' . $path);
                     }
@@ -66,7 +66,7 @@ class CatsModulePlugin extends Plugin
             ), new \Twig_SimpleFunction(
                 'getCategoriesLevel2',
                 function () {
-                    if (!$getCategoriesLevel2 = $this->dispatch(new getCategoriesLevel2())) {
+                    if (!$getCategoriesLevel2 = dispatch_sync(new getCategoriesLevel2())) {
                         return 0;
                     }
                     return $getCategoriesLevel2;
@@ -74,7 +74,7 @@ class CatsModulePlugin extends Plugin
             ), new \Twig_SimpleFunction(
                 'getCategoriesLevel3',
                 function () {
-                    if (!$getCategoriesLevel3 = $this->dispatch(new getCategoriesLevel3())) {
+                    if (!$getCategoriesLevel3 = dispatch_sync(new getCategoriesLevel3())) {
                         return 0;
                     }
                     return $getCategoriesLevel3;
